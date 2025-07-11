@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    .container { max-width: 600px; margin: 0 auto;}
+    .letters {padding: 10px 15px; display: inline-block; background: #3498dc; color: white; font-size: 1.5rem;}
+  </style>
+</head>
+<body>
+    <div class="container">
+      <h2>New Game</h2>
+      <div class="row">
+        <div class="col">
+              <% @generated_letters.each do |letter| %>
+        <span class='letters'><%= letter %></span>
+      <% end %>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="container">
+      <h2>What is the longest word you can find?</h2>
+      <form action="/score" method="post" data-turbo="false">
+        <div class="input-group mb-3">
+          <input type="text" name="word" class="form-control">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Play</button>
+        </div>
+
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag :letters, @generated_letters %>
+      </form>
+    </div>
+</body>
+</html>
